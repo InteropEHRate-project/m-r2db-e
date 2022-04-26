@@ -1,1 +1,1 @@
-# m-r2db-e
+# InteropEHRate Remote-to-Device (R2D) Backup Protocol's HR Exchange Library
