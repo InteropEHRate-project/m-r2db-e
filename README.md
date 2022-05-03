@@ -1,4 +1,4 @@
-# Remote-to-Device (R2D) Backup Protocol's HR Exchange Mobile Library
+# Remote-to-Device Backup (R2DB) Protocol's HR Exchange Mobile Library
 Reference Implementation of the R2D Backup protocol specified by the InteropEHRate project.
 
 ## Installation Guide
