@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConsentActivity">
+
+    <Button
+        android:id="@+id/goToAccount"
+        android:layout_width="226dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="710dp"
+        android:text="Go To Account Main Page"
+        app:layout_anchor="@+id/goToAccount"
+        app:layout_anchorGravity="top|center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadConsentStore"
+        android:layout_width="226dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="144dp"
+        android:text="Download Store Consent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadConsentShare"
+        android:layout_width="226dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="92dp"
+        android:text="Download Share Consent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/withdrawShare"
+        android:layout_width="106dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="32dp"
+        android:text="Withdraw Share"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/uploadConsentStore"
+        android:layout_width="226dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="602dp"
+        android:text="Upload Store Consent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/uploadConsentShare"
+        android:layout_width="226dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="662dp"
+        android:text="Upload Share Consent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_result"
+        android:layout_width="375dp"
+        android:layout_height="366dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
+        android:scrollbars="vertical"
+        android:text="This is where the message received is shown!"
+        android:layout_gravity="left"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DownloadActivity">
+
+
+    <Button
+        android:id="@+id/listBuckets"
+        android:layout_width="106dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="644dp"
+        android:text="List Buckets"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/listObjects"
+        android:layout_width="106dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="644dp"
+        android:text="List Objects"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadIPS"
+        android:layout_width="118dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="144dp"
+        android:text="Download IPS"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadPatient"
+        android:layout_width="118dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="800dp"
+        android:layout_marginTop="144dp"
+        android:text="Download Patient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadLR"
+        android:layout_width="124dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="92dp"
+        android:text="Down LR"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadIR"
+        android:layout_width="104dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="92dp"
+        android:text="Down ImR"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadEncounter"
+        android:layout_width="115dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="40dp"
+        android:text="Down Encounter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downloadPrescription"
+        android:layout_width="115dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="40dp"
+        android:text="Down Prescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_result"
+        android:layout_width="375dp"
+        android:layout_height="366dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
+        android:scrollbars="vertical"
+        android:text="This is where the message received is shown!"
+        android:layout_gravity="left"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToAccount"
+        android:layout_width="229dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="596dp"
+        android:text="Go To Account Main Page"
+        app:layout_anchor="@+id/goToAccount"
+        app:layout_anchorGravity="top|center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

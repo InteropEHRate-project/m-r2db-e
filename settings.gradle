@@ -1,0 +1,3 @@
+include ':mr2dbackup'
+include ':app'
+rootProject.name = "mr2dbackup"
