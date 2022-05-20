@@ -15,7 +15,7 @@ If the development team importing the library is using Maven instead of Gradle, 
 <dependency>
 	<groupId>eu.interopehrate</groupId>
 	<artifactId>mr2db</artifactId>
-	<version>0.3.7</version>
+	<version>1.0.0</version>
 </dependency>
 ```
 
