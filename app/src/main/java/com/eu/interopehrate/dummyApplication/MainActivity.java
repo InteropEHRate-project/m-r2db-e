@@ -114,9 +114,20 @@ public class MainActivity extends AppCompatActivity {
                             citizen.setSymmetricKey("XVggCm3qd22ceCDlTe4LEPFmAm6driB+pSilZqs+u0k=");
                             citizen.setConsentShareAccepted(account.isConsentShareAccepted());
                             citizen.setConsentStoreAccepted(account.isConsentStoreAccepted());
-                            mTextViewResult.setText("MinIO response!: " + account.getMsg() +
-                                    "\nToken: " + account.getToken() +
-                                    "\nEC: " + account.getStatus());
+                            if (citizen.isConsentShareAccepted()) {
+                                mTextViewResult.setText("MinIO response!: " + account.getMsg() +
+                                        "\nToken: " + account.getToken() +
+                                        "\nEC: " + account.getStatus() +
+                                        "\nHRIET: " + account.getHriEmergencyToken() +
+                                        "\nHRICID: " + account.getCitizenId());
+                                citizen.setHriEmergencyToken(account.getHriEmergencyToken());
+                                citizen.setCitizenId(account.getCitizenId());
+                                citizen.setHriToken(account.getHriToken());
+                            } else {
+                                mTextViewResult.setText("MinIO response!: " + account.getMsg() +
+                                        "\nToken: " + account.getToken() +
+                                        "\nEC: " + account.getStatus());
+                            }
                         }
 
                         @Override
@@ -159,4 +170,76 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+//    public void keystoreStuff(){
+//        try {
+//            InputStream inAl = getAssets().open("alias");
+//            OutputStream outAl = null;
+//
+//            try {
+//                outAl = new FileOutputStream("/data/user/0/com.eu.interopehrate.mr2dbackup/files/alias");
+//                byte[] bufAl = new byte[1024];
+//                int lenAl;
+//                while((lenAl=inAl.read(bufAl))>0){
+//                    outAl.write(bufAl,0,lenAl);
+//                }
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            finally {
+//                // Ensure that the InputStreams are closed even if there's an exception.
+//                try {
+//                    if ( outAl != null ) {
+//                        outAl.close();
+//                    }
+//
+//                    // If you want to close the "in" InputStream yourself then remove this
+//                    // from here but ensure that you close it yourself eventually.
+//                    inAl.close();
+//                }
+//                catch ( IOException e ) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } catch (IOException e) {
+//            // Should never happen!
+//            throw new RuntimeException(e);
+//        }
+//
+//        try {
+//            InputStream inKS = getAssets().open("keystore.p12");
+//            OutputStream outKS = null;
+//
+//            try {
+//                outKS = new FileOutputStream("/data/user/0/com.eu.interopehrate.mr2dbackup/files/keystore.p12");
+//                byte[] bufKS = new byte[1024];
+//                int lenKS;
+//                while((lenKS=inKS.read(bufKS))>0){
+//                    outKS.write(bufKS,0,lenKS);
+//                }
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            finally {
+//                // Ensure that the InputStreams are closed even if there's an exception.
+//                try {
+//                    if ( outKS != null ) {
+//                        outKS.close();
+//                    }
+//
+//                    // If you want to close the "in" InputStream yourself then remove this
+//                    // from here but ensure that you close it yourself eventually.
+//                    inKS.close();
+//                }
+//                catch ( IOException e ) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } catch (IOException e) {
+//            // Should never happen!
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 }

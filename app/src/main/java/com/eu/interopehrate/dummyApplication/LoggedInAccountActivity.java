@@ -102,6 +102,7 @@ public class LoggedInAccountActivity extends AppCompatActivity {
 //      This part of the code is used for the QRCode creation and visualization.
         String textForTextView = "<b>SK:</b> " + citizen.getSymmetricKey() +
                 "<br><b>Token:</b> " + citizen.getToken() +
+                "<br><b>Emergency Token:</b> " + citizen.getEmergencyToken() +
                 "<br><b>Username:</b> " + citizen.getUsername() +
                 "<br><b>eToken:</b> " + citizen.getEmergencyToken()+
                 "<br><b>hriToken:</b> " + citizen.getHriToken()+

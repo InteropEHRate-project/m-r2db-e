@@ -20,16 +20,21 @@ public class AuditInfoActivity extends AppCompatActivity {
     private TextView mTextViewResult;
     private static final String TAG = "AuditInfoActivity";
 
+    /* NEED TO BE IMPORTED IN EVERY ACTIVITY */
     private Account citizen = Account.Account();
     MR2DBackupFactory mr2dbackup;
-
+//    com.eu.interopehrate.mr2dbackup.SEHRCloudInterface SEHRCloudInterface;
+    /* END */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audit_info);
 
+        /* NEED TO BE IMPORTED IN EVERY ACTIVITY */
         mr2dbackup = new MR2DBackupFactory(citizen.getCloudUrl());
+//        SEHRCloudInterface = SEHRCloudClient.getClient().create(SEHRCloudInterface.class);
+        /* END */
 
         btnAuditInfo = findViewById(R.id.auditInfo);
         btnAccountMain = findViewById(R.id.goToAccount);
@@ -45,6 +50,8 @@ public class AuditInfoActivity extends AppCompatActivity {
     }
 
     public void auditInfo(){
+//        mr2dbackup.getAuditInfo(citizen.getToken(), "XVggCm3qd22ceCDlTe4LEPFmAm6driB+pSilZqs+u0k=", new MR2DBackupFactory.MR2DBackupInterface() {
+//        mr2dbackup.getAuditInfo(citizen.getToken(), "UiYmJk/iWopGS2n0YIhZsgp1auRVyahR7sgFOtEC5r4=", new MR2DBackupFactory.MR2DBackupInterface() {
         mr2dbackup.getAuditInfo(citizen.getToken(), citizen.getSymmetricKey(), new MR2DBackupFactory.MR2DBackupInterface() {
             @Override
             public void onResponse(Account account) throws Exception {

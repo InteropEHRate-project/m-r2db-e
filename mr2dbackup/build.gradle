@@ -1,7 +1,7 @@
 apply plugin: "maven-publish"
 apply plugin: 'com.android.library'
 group = "eu.interopehrate"
-version="0.3.7"
+version="0.4.0"
 
 //plugins {
 //    id 'com.android.library'
@@ -61,16 +61,23 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
     implementation group:'eu.interoperhate', name:'encryptedcomunication', version: '0.0.2'
-    implementation group: 'eu.interopehrate', name: 'mhri', version: '0.1.2'
-    implementation group: 'eu.interopehrate', name: 'mr2da', version: '0.4.2'
+    implementation group: 'eu.interopehrate', name: 'mhri', version: '0.1.3'
+    implementation (group: 'eu.interopehrate', name: 'mr2da', version: '0.4.6'){
+        exclude group:'commons-logging'
+    }
 //    implementation group:'eu.interoperhate', name:'M-R2D-SM', version: '0.0.2'
 //    implementation group:'eu.interoperhate', name:'mrdssm', version: '0.1.0'
-    implementation group:'eu.interoperhate', name:'mrdssm', version: '0.2.0'
+//    implementation group:'eu.interoperhate', name:'mrdssm', version: '0.2.0'
 //    implementation group:'eu.interopehrate', name:'mr2dsm', version: '0.2.2'
+    implementation(group:'eu.interopehrate', name:'mrdssm', version: '0.3.0') {
+        exclude group:'commons-logging'
+        exclude module:'mrdssm'
+    }
+//    implementation group: 'eu.interopehrate', name: 'iehr-provenance', 'version': '0.0.2'
     implementation group: 'eu.interopehrate', name:'r2d-d2d-commons', 'version': '0.0.7'
 //    implementation group:'eu.interopehrate', name:'mr2dbackup', version: '0.0.4'
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
-    testImplementation 'junit:junit:4.+'
+//    testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation (group: 'ca.uhn.hapi.fhir', name: 'hapi-fhir-android', version: '4.0.1')

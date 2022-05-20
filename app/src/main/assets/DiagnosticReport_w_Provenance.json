@@ -1,0 +1,1305 @@
+{
+  "resourceType": "Bundle",
+  "id": "1",
+  "language": "en",
+  "type": "searchset",
+  "timestamp": "2022-05-05T15:26:58.075Z",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "3758959.1",
+        "meta": {
+          "profile": [
+            "http://interopehrate.eu/fhir/StructureDefinition/Encounter-IEHR"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "3758959.1"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "IEHR.FTGM07.0.01",
+        "meta": {
+          "profile": [
+            "http://interopehrate.eu/fhir/StructureDefinition/DiagnosticReport-LaboratoryReport-IEHR"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "IEHR.FTGM07.0.01"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "LAB"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "30954-2",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Test diagnostici rilevanti &o dati di laboratorio:Osservazione:Pt:^Paziente:Nar:"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595280"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Relevant diagnostic tests/laboratory data Narrative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "encounter": {
+          "reference": "Encounter/3758959.1"
+        },
+        "effectiveDateTime": {},
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "resultsInterpreter": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "result": [
+          {
+            "reference": "Observation/loinc-8462-420220403160000+0200"
+          },
+          {
+            "reference": "Observation/loinc-8867-420220403160000+0200"
+          },
+          {
+            "reference": "Observation/loinc-8480-620220403160000+0200"
+          },
+          {},
+          {
+            "reference": "Observation/loinc-33762-620220403080000+0200"
+          },
+          {
+            "reference": "Observation/loinc-2345-720220403080000+0200"
+          },
+          {
+            "reference": "Observation/loinc-1975-220220403080000+0200"
+          },
+          {
+            "reference": "Observation/loinc-777-320220403080000+0200"
+          },
+          {
+            "reference": "Observation/loinc-1742-620220403080000+0200"
+          },
+          {
+            "reference": "Observation/loinc-2324-220220403080000+0200"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-8462-420220403160000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-8462-420220403160000+0200"
+          }
+        ],
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8462-4",
+              "display": "Diastolic blood pressure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 84,
+          "unit": "Millimetre of mercury",
+          "system": "http://unitsofmeasure.org",
+          "code": "Millimetre of mercury"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "IEHR.FTGM07",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "IEHR.FTGM07"
+          }
+        ],
+        "name": [
+          {
+            "family": "FTGM",
+            "given": [
+              "SEVEN"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1950-06-08",
+        "generalPractitioner": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-4544-320220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-4544-320220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4544-3",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Ematocrito:VFr:Pt:Sangue:Qn:Conta automatica"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595287"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Hematocrit [Volume Fraction] of Blood by Automated count"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 37.1,
+          "unit": "Percentage",
+          "system": "http://unitsofmeasure.org",
+          "code": "Percentage"
+        },
+        "referenceRange": [
+          {
+            "text": "26,8 - 37,8"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "MNDMHL58M15G702G",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Practitioner-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "MNDMHL58M15G702G"
+          }
+        ],
+        "name": [
+          {
+            "family": "EMDIN",
+            "given": [
+              "MICHELE"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-2160-020220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-2160-020220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2160-0",
+              "display": "Orientation generale : Creatinine"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 0.22,
+          "unit": "Milligram/decilitre",
+          "system": "http://unitsofmeasure.org",
+          "code": "Milligram/decilitre"
+        },
+        "referenceRange": [
+          {
+            "text": "0,16 - 0,39"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-789-820220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-789-820220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "789-8",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Eritrociti:NCnc:Pt:Sangue:Qn:Conta automatica"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595291"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Erythrocytes [#/volume] in Blood by Automated count"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 4.38,
+          "unit": "x10^6/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "x10^6/L"
+        },
+        "referenceRange": [
+          {
+            "text": "3,02 - 5,07"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-718-720220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-718-720220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "718-7",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Emoglobina:MCnc:Pt:Sangue:Qn:"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595294"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Hemoglobin [Mass/volume] in Blood"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 12.7,
+          "unit": "Gram/decilitre",
+          "system": "http://unitsofmeasure.org",
+          "code": "Gram/decilitre"
+        },
+        "referenceRange": [
+          {
+            "text": "8,9 - 12,7"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-2324-220220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-2324-220220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2324-2",
+              "display": "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 40,
+          "unit": "IU/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "IU/L"
+        },
+        "referenceRange": [
+          {
+            "text": "12 - 122"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-1742-620220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-1742-620220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1742-6",
+              "display": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 12,
+          "unit": "IU/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "IU/L"
+        },
+        "referenceRange": [
+          {
+            "text": "5 - 33"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-777-320220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-777-320220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "777-3",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Piastrine:NCnc:Pt:Sangue:Qn:Conta automatica"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595302"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Cytologie sanguine: Plaquettes"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 313,
+          "unit": "X10^3/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "X10^3/L"
+        },
+        "referenceRange": [
+          {
+            "text": "206 - 562"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-1975-220220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-1975-220220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "1975-2",
+              "display": "Exploration hepatique : Bilirubine totale"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 0.3,
+          "unit": "Milligram/decilitre",
+          "system": "http://unitsofmeasure.org",
+          "code": "Milligram/decilitre"
+        },
+        "referenceRange": [
+          {
+            "text": "< 1,2"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-2345-720220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-2345-720220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2345-7",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Glucosio:MCnc:Pt:Siero/Plasma:Qn:"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595306"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Glucose [Mass/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 82,
+          "unit": "Milligram/decilitre",
+          "system": "http://unitsofmeasure.org",
+          "code": "Milligram/decilitre"
+        },
+        "referenceRange": [
+          {
+            "text": "60 - 99 (Criteri interpretativi                                                ADA 2014 $ 60 - 99 glicemia a digiuno normale$ 100 -                                                125 glicemia a digiuno alterata$ >= 126                                                indicativa diabete mellito,$ 2 riscontri)"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-33762-620220403080000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-33762-620220403080000+0200"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "33762-6",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Peptide natriuretico.proormone B N-Terminale:MCnc:Pt:Siero/Plasma:Qn:"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595309"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 3295,
+          "unit": "ng/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "ng/L"
+        },
+        "referenceRange": [
+          {
+            "text": "< 125"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-8480-620220403160000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-8480-620220403160000+0200"
+          }
+        ],
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8480-6",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Sistolica intravascolare:Pres:Pt:Sistema arterioso:Qn:"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595311"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Systolic blood pressure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 117,
+          "unit": "Millimetre of mercury",
+          "system": "http://unitsofmeasure.org",
+          "code": "Millimetre of mercury"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "loinc-8867-420220403160000+0200",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-results-laboratory-uv-ips"
+          ]
+        },
+        "language": "en",
+        "identifier": [
+          {
+            "value": "loinc-8867-420220403160000+0200"
+          }
+        ],
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "_display": {
+                "extension": [
+                  {
+                    "extension": [
+                      {
+                        "url": "lang",
+                        "valueCode": "ita"
+                      },
+                      {
+                        "url": "content",
+                        "valueString": "Frequenza cardiaca:NRat:Pt:XXX:Qn:"
+                      },
+                      {
+                        "url": "http://interopehrate.eu/fhir/StructureDefinition/ExtendedTranslation-IEHR",
+                        "valueReference": {
+                          "reference": "Provenance/1652281595314"
+                        }
+                      }
+                    ],
+                    "url": "http://hl7.org/fhir/StructureDefinition/translation"
+                  }
+                ]
+              },
+              "display": "Heart rate"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/IEHR.FTGM07"
+        },
+        "effectiveDateTime": "2022-04-03",
+        "performer": [
+          {
+            "reference": "Practitioner/MNDMHL58M15G702G"
+          }
+        ],
+        "valueQuantity": {
+          "value": 64,
+          "unit": "Beats per minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "Beats per minute"
+        }
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595280/DiagnosticReport/IEHR.FTGM07.0.01",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595280",
+        "target": [
+          {
+            "reference": "DiagnosticReport/IEHR.FTGM07.0.01"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.280Z",
+        "recorded": "2022-05-11T15:06:35.280Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Device/1",
+      "resource": {
+        "resourceType": "Device",
+        "id": "1",
+        "status": "active",
+        "deviceName": [
+          {
+            "name": "iehr-translation-service",
+            "type": "other"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595287/Observation/loinc-4544-320220403080000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595287",
+        "target": [
+          {
+            "reference": "Observation/loinc-4544-320220403080000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.287Z",
+        "recorded": "2022-05-11T15:06:35.287Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595291/Observation/loinc-789-820220403080000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595291",
+        "target": [
+          {
+            "reference": "Observation/loinc-789-820220403080000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.291Z",
+        "recorded": "2022-05-11T15:06:35.291Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595294/Observation/loinc-718-720220403080000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595294",
+        "target": [
+          {
+            "reference": "Observation/loinc-718-720220403080000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.294Z",
+        "recorded": "2022-05-11T15:06:35.294Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595302/Observation/loinc-777-320220403080000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595302",
+        "target": [
+          {
+            "reference": "Observation/loinc-777-320220403080000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.302Z",
+        "recorded": "2022-05-11T15:06:35.302Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595306/Observation/loinc-2345-720220403080000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595306",
+        "target": [
+          {
+            "reference": "Observation/loinc-2345-720220403080000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.306Z",
+        "recorded": "2022-05-11T15:06:35.306Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595309/Observation/loinc-33762-620220403080000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595309",
+        "target": [
+          {
+            "reference": "Observation/loinc-33762-620220403080000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.309Z",
+        "recorded": "2022-05-11T15:06:35.309Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595311/Observation/loinc-8480-620220403160000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595311",
+        "target": [
+          {
+            "reference": "Observation/loinc-8480-620220403160000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.311Z",
+        "recorded": "2022-05-11T15:06:35.311Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "IEHR/fhir/Provenance/1652281595314/Observation/loinc-8867-420220403160000+0200",
+      "resource": {
+        "resourceType": "Provenance",
+        "id": "1652281595314",
+        "target": [
+          {
+            "reference": "Observation/loinc-8867-420220403160000+0200"
+          }
+        ],
+        "occurredDateTime": "2022-05-11T15:06:35.314Z",
+        "recorded": "2022-05-11T15:06:35.314Z",
+        "agent": [
+          {
+            "who": {
+              "reference": "Device/1"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips"
+    ]
+  }
+}

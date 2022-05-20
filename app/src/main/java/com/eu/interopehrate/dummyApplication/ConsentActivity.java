@@ -41,12 +41,13 @@ public class ConsentActivity extends AppCompatActivity {
     private Account citizen = Account.Account();
 
     MR2DBackupFactory controller;
+//    SEHRCloudInterface SEHRCloudInterface;
 
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        keystore 
+//        keystoreStuff();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consent);
         System.out.println(citizen.getCloudUrl());
@@ -65,6 +66,13 @@ public class ConsentActivity extends AppCompatActivity {
         btnAccountMain.setOnClickListener(v -> startActivity(new Intent(ConsentActivity.this,
                 LoggedInAccountActivity.class)));
 
+//        btnCheckStore.setOnClickListener(v -> {
+//            checkConsentStore();
+//        });
+//
+//        btnCheckShare.setOnClickListener(v -> {
+//            checkConsentShare();
+//        });
 
         btnDownloadConsentStore.setOnClickListener(v -> {
             try {
@@ -334,4 +342,44 @@ public class ConsentActivity extends AppCompatActivity {
         }
 
     }
+
+//    public void checkConsentStore() {
+//        controller.consentStoreAccepted(citizen.getToken(), new SEHRCloudController.SEHRCloudControllerInterface() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onResponse(Account account)  {
+//                    citizen.setConsentStoreAccepted(account.isConsentStoreAccepted());
+//                    mTextViewResult.setText("MinIO response!: "+ account.getMsg() +
+//                            "\nToken: " + account.isConsentStoreAccepted());
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable t) {
+//                if (t != null) {
+//                    Log.e(TAG, "onFailure: " + t.getLocalizedMessage());
+//                }
+//            }
+//        });
+//    }
+//
+//    public void checkConsentShare() {
+//        controller.consentShareAccepted(citizen.getToken(), new SEHRCloudController.SEHRCloudControllerInterface() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onResponse(Account account)  {
+//                citizen.setConsentShareAccepted(account.isConsentShareAccepted());
+//                mTextViewResult.setText("MinIO response!: "+ account.getMsg() +
+//                        "\nToken: " + account.isConsentShareAccepted());
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable t) {
+//                if (t != null) {
+//                    Log.e(TAG, "onFailure: " + t.getLocalizedMessage());
+//                }
+//            }
+//        });
+//    }
+
+
 }

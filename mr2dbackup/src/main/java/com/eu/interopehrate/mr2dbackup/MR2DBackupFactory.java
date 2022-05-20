@@ -93,8 +93,8 @@ public class MR2DBackupFactory {
             });
     }
 
-    public void login(String username, String password, String symKey, MR2DBackupInterface listener) {
-        account.setSymmetricKey(symKey);
+      public void login(String username, String password, String symKey, MR2DBackupInterface listener) {
+            account.setSymmetricKey(symKey);
         account.setUsername(username);
         Call<Account> call = SEHRCloudInterface.login(account.getCloudUrl()+"/citizen/login", username, password);
         call.enqueue(new Callback<Account>() {
@@ -107,6 +107,27 @@ public class MR2DBackupFactory {
                             account.setEmergencyToken(response.body().getEmergencyToken());
                             if(response.body().getConsentShareIsAccepted().equals("True")) {
                                 account.setConsentShareAccepted(true);
+                                Thread thread = new Thread(() -> {
+                                    JSONObject hriResponse = null;
+                                    try {
+                                        String encryptedUsername = encryptData(username, symKey)
+                                                .replace("/", "DASHREPLACEDASH")
+                                                .replace("\n", "");
+                                        hriResponse = new JSONObject(hriController.findByUsername(encryptedUsername).toString());
+                                        System.out.println(hriResponse);
+                                        JSONArray data = (JSONArray) hriResponse.get("data");
+                                        JSONObject hriData = (JSONObject) data.get(0);
+                                        account.setCitizenId(hriData.getString("citizenId"));
+                                        account.setHriToken(hriResponse.getString("hriAccessToken"));
+                                        account.setHriEmergencyToken(hriResponse.getString("hriEmergencyToken"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                                thread.start();
+                                Thread.sleep(800);
                             } else {
                                 account.setConsentShareAccepted(false);
                             }
@@ -649,7 +670,6 @@ public class MR2DBackupFactory {
     public void create(String token, ResourceCategory rc, String data, String symKey, MR2DBackupInterface listener)
             throws Exception {
 
-        System.out.println("DC: \t" + rc.toString());
         String encryptedFileType = encryptData(rc.toString(), symKey);
         encryptedFileType = encryptedFileType.replace("\n", "");
         encryptedFileType = encryptedFileType.replace("/", "DASHREPLACEDASH");
@@ -667,7 +687,6 @@ public class MR2DBackupFactory {
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if (listener != null) {
                     try {
-//                        account.setMsg(response.body().getMsg());
                         account.setStatus(response.body().getStatus());
                         System.out.println("CREATE: \t"+response.body().getStatus());
                         listener.onResponse(response.body());
@@ -686,22 +705,16 @@ public class MR2DBackupFactory {
 
     public void get(String token, String bucket, ResourceCategory rc, String symKey, MR2DBackupInterface listener) throws Exception, JSONException {
 
-        System.out.println(rc.toString());
         String encryptedFileType = encryptData(rc.toString(), symKey);
         encryptedFileType = encryptedFileType.replace("\n", "");
         encryptedFileType = encryptedFileType.replace("/", "DASHREPLACEDASH");
         encryptedFileType += ".txt";
-        System.out.println(encryptedFileType);
-        
-//        String metadata = "{\"file-type\":\"txt\",\n\"hr-type\":\""+encryptedFileType+"\"}";
 
         Call<String> call = SEHRCloudInterface.downloadHR(account.getCloudUrl() + "/citizen/" + bucket + "/" + encryptedFileType, token);
         call.enqueue(new Callback<String>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
-//                String isJsonValid = isJSONValid(response.body());
                 if (!response.isSuccessful()) {
                     try {
                         JSONObject json = new JSONObject(response.errorBody().string());
@@ -720,8 +733,6 @@ public class MR2DBackupFactory {
                     }
                 } else if (response.isSuccessful()) {
                     Boolean isJsonValid = isJSONValid(response.body());
-//                    System.out.println("RESPONSE BODY: \t"+response.body().substring(1, 100));
-//                    System.out.println("IS VALID JSON: \t"+isJsonValid.toString());
                     if (isJsonValid) {
                         try {
                             JSONObject json = new JSONObject(response.body());
@@ -744,17 +755,27 @@ public class MR2DBackupFactory {
                         }
                     } else {
                         String encryptedHR = response.body();
-//                        System.out.println("Downloaded data from the S-EHR Cloud: \t" + encryptedHR);
                         String decryptedHR = null;
                         try {
                             decryptedHR = decryptData(encryptedHR, symKey);
-//                            System.out.println("Downloaded data from the S-EHR Cloud (after decryption): \t" + decryptedHR);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         if (listener != null && decryptedHR != null) {
+                            boolean pcResult = true;
                             try {
+                                pcResult = provenanceCheck(decryptedHR);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            if (pcResult) {
                                 account.setHR(decryptedHR);
+                                account.setMsg("Resource passed Provenance check.");
+                            } else {
+                                account.setHR(null);
+                                account.setMsg("ERROR: Resource failed Provenance check.");
+                            }
+                            try {
                                 listener.onResponse(account);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -779,10 +800,8 @@ public class MR2DBackupFactory {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-//                account.setMsg("HR not found");
                 listener.onFailure(t);
             }
         });
@@ -807,7 +826,6 @@ public class MR2DBackupFactory {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -898,7 +916,6 @@ public class MR2DBackupFactory {
                     } catch (NullPointerException e) {
                         account.setObjectList(null);
                     }
-
                 }
                 try {
                     System.out.println(account.getObjectList().toString());
@@ -926,10 +943,11 @@ public class MR2DBackupFactory {
     private String signConsent(String consent, Context context) throws NoSuchProviderException, NoSuchAlgorithmException, UnrecoverableKeyException, CertificateException, KeyStoreException, IOException, InvalidKeySpecException, SignatureException, InvalidKeyException {
         String CA_URL = "http://212.101.173.84:8071";
         CryptoManagement cryptoManagement = CryptoManagementFactory.create(CA_URL);
-
-
         Log.d("CONSENT", consent);
 
+//        V0.1.0
+//        PrivateKey privateKey = cryptoManagement.getPrivateKey(context, "ITMario");
+//        RSAPublicKey rsaPublicKey = cryptoManagement.getPublicKey(context, "ITMario");
 
 //        V0.2.0
         PrivateKey privateKey = cryptoManagement.getPrivateKey(context);
@@ -944,22 +962,10 @@ public class MR2DBackupFactory {
         return signedConsent;
     }
 
-    private boolean checkProvenanceInformation (String healthRecord) throws JSONException {
-        boolean hasProvenanceTrackingInformation = false;
-        IParser parser = ctx.newJsonParser();
-        Bundle bundle = parser.parseResource(Bundle.class, healthRecord);
-        String signatureFormat = bundle.getSignature().getSigFormat();
-        String signature = bundle.getSignature().getData().toString();
-        String targetFormat = bundle.getSignature().getTargetFormat();
-        String id = bundle.getSignature().getId();
-        Date when = bundle.getSignature().getWhen();
-        String who = bundle.getSignature().getWho().getReference();
-
-        return hasProvenanceTrackingInformation;
-    }
-
-    private boolean complianceCheck (String heathRecords){
-        return true;
+    private boolean provenanceCheck (String resource) throws Exception {
+        ProvenanceChecker pc = new ProvenanceChecker();
+        boolean pcResult = pc.checkProvenance(resource);
+        return pcResult;
     }
 
     public boolean setQRCOdeContent(String citizenId, String hriEmergencyToken, String emergencyToken, String symKey) throws JSONException {
@@ -1003,3 +1009,283 @@ public class MR2DBackupFactory {
         return true;
     }
 }
+
+/* COMMENTED OUT */
+
+/*
+//    public void create(String data, DocumentCategory dc, String token, String symKey, SEHRCloudControllerInterface listener)
+//            throws Exception {
+//
+//        System.out.println("DC: \t"+dc.toString());
+//        String encryptedFileType = encryptData(dc.toString(), symKey);
+//        encryptedFileType = encryptedFileType.replace("\n", "");
+//        encryptedFileType = encryptedFileType.replace("/", "DASHREPLACEDASH");
+//        String metadata = "{\"file-type\":\"txt\",\n\"hr-type\":\""+encryptedFileType+"\"}";
+//        System.out.println(metadata);
+//
+//        // Encrypt data before uploading
+//        String encryptedData = encryptData(data, symKey);
+//
+//        RequestBody ehr = RequestBody.create(MediaType.parse("text/plain"), encryptedData);
+//
+//        Call<Account> call = accountInterface.uploadHR(token, metadata, ehr);
+//        call.enqueue(new Callback<Account>() {
+//            @Override
+//            public void onResponse(Call<Account> call, Response<Account> response) {
+//                if (listener != null){
+//                    try {
+////                        account.setMsg(response.body().getMsg());
+////                        account.setStatus(response.body().getStatus());
+//                        System.out.println(response.body());
+//                        listener.onResponse(response.body());
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Account> call, Throwable t) {
+//                listener.onFailure(t);
+//            }
+//        });
+//    }
+//
+//    public void create(String data, FHIRResourceCategory rc, String token, String symKey, SEHRCloudControllerInterface listener)
+//            throws Exception {
+//        System.out.println("RC: \t"+rc.toString());
+//        String encryptedFileType = encryptData(rc.toString(), symKey);
+//        encryptedFileType = encryptedFileType.replace("\n", "");
+//        encryptedFileType = encryptedFileType.replace("/", "DASHREPLACEDASH");
+//        String metadata = "{\"file-type\":\"txt\",\n\"hr-type\":\""+encryptedFileType+"\"}";
+//        System.out.println(metadata);
+//
+//        // Encrypt data before uploading
+//        String encryptedData = encryptData(data, symKey);
+//
+//        RequestBody ehr = RequestBody.create(MediaType.parse("text/plain"), encryptedData);
+//
+//        Call<Account> call = accountInterface.uploadHR(token, metadata, ehr);
+//        call.enqueue(new Callback<Account>() {
+//            @Override
+//            public void onResponse(Call<Account> call, Response<Account> response) {
+//                if (listener != null){
+//                    try {
+////                        account.setMsg(response.body().getMsg());
+////                        account.setStatus(response.body().getStatus());
+//                        System.out.println(response.body());
+//                        listener.onResponse(response.body());
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Account> call, Throwable t) {
+//                listener.onFailure(t);
+//            }
+//        });
+//    }
+*/
+
+/*
+//    public void get(String token, DocumentCategory dc, String symKey, MR2DBackupInterface listener) throws Exception, JSONException {
+//
+//        System.out.println(dc.toString());
+//        String encryptedFileType = encryptData(dc.toString(), symKey);
+//        encryptedFileType = encryptedFileType.replace("\n", "");
+//        encryptedFileType = encryptedFileType.replace("/", "DASHREPLACEDASH");
+//        System.out.println(encryptedFileType);
+//        String metadata = "{\"file-type\":\"txt\",\n\"hr-type\":\""+encryptedFileType+"\"}";
+//
+//        Call<String> call = SEHRCloudInterface.downloadHR(token, metadata);
+//        call.enqueue(new Callback<String>() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//
+////                String isJsonValid = isJSONValid(response.body());
+//                if (!response.isSuccessful()) {
+//                    try {
+//                        JSONObject json = new JSONObject(response.errorBody().string());
+//                        account.setMsg(json.getString("msg"));
+//                        account.setStatus(json.getInt("errorCode"));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    try {
+//                        listener.onResponse(account);
+//                        account.setHR(null);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else if (response.isSuccessful()) {
+//                    Boolean isJsonValid = isJSONValid(response.body());
+//                    if (isJsonValid) {
+//                        try {
+//                            JSONObject json = new JSONObject(response.body());
+//                            account.setMsg(json.getString("msg"));
+//                            if (json.has("status")) {
+//                                account.setStatus(json.getInt("status"));
+//                            } else if (json.has("errorCode")) {
+//                                account.setStatus(json.getInt("errorCode"));
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        try {
+//                            listener.onResponse(account);
+//                            account.setHR(null);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        String encryptedHR = response.body();
+//                        String decryptedHR = null;
+//                        try {
+//                            decryptedHR = decryptData(encryptedHR, symKey);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        if (listener != null && decryptedHR != null) {
+//                            try {
+//                                account.setHR(decryptedHR);
+//                                listener.onResponse(account);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else if (listener != null) {
+//                            account.setMsg("decryptedHR is null");
+//                            account.setHR(null);
+//                            try {
+//                                listener.onResponse(account);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            account.setMsg("listener is null");
+//
+//                            try {
+//                                listener.onResponse(account);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+////                account.setMsg("HR not found");
+//                listener.onFailure(t);
+//            }
+//        });
+//    }
+//
+//    public void get(String token, FHIRResourceCategory rc, String symKey, MR2DBackupInterface listener) throws Exception, JSONException {
+//
+//        System.out.println(rc.toString());
+//        String encryptedFileType = encryptData(rc.toString(), symKey);
+//        encryptedFileType = encryptedFileType.replace("\n", "");
+//        encryptedFileType = encryptedFileType.replace("/", "DASHREPLACEDASH");
+//        String metadata = "{\"file-type\":\"txt\",\n\"hr-type\":\""+encryptedFileType+"\"}";
+//
+//        Call<String> call = SEHRCloudInterface.downloadHR(token, metadata);
+//        call.enqueue(new Callback<String>() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//
+////                String isJsonValid = isJSONValid(response.body());
+//                if (!response.isSuccessful()) {
+//                    try {
+//                        JSONObject json = new JSONObject(response.errorBody().string());
+//                        account.setMsg(json.getString("msg"));
+//                        account.setStatus(json.getInt("errorCode"));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    try {
+//                        listener.onResponse(account);
+//                        account.setHR(null);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else if (response.isSuccessful()) {
+//                    Boolean isJsonValid = isJSONValid(response.body());
+//                    if (isJsonValid) {
+//                        try {
+//                            JSONObject json = new JSONObject(response.body());
+//                            account.setMsg(json.getString("msg"));
+//                            if (json.has("status")) {
+//                                account.setStatus(json.getInt("status"));
+//                            } else if (json.has("errorCode")) {
+//                                account.setStatus(json.getInt("errorCode"));
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        try {
+//                            listener.onResponse(account);
+//                            account.setHR(null);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        String encryptedHR = response.body();
+//                        String decryptedHR = null;
+//                        try {
+//                            decryptedHR = decryptData(encryptedHR, symKey);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        if (listener != null && decryptedHR != null) {
+//                            try {
+//                                account.setHR(decryptedHR);
+//                                listener.onResponse(account);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else if (listener != null) {
+//                            account.setMsg("decryptedHR is null");
+//                            account.setHR(null);
+//                            try {
+//                                listener.onResponse(account);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            account.setMsg("listener is null");
+//
+//                            try {
+//                                listener.onResponse(account);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+////                account.setMsg("HR not found");
+//                listener.onFailure(t);
+//            }
+//        });
+//    }
+
+}
+*/

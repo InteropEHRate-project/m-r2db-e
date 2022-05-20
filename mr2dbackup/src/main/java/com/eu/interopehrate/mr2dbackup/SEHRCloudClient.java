@@ -12,7 +12,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class SEHRCloudClient {
 
-    private static String BASE_URL = "$SEHRCLOUDCLIENTURL$";
+    private static String BASE_URL = "http://213.249.46.253:5000";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(String CLOUD_URL){
